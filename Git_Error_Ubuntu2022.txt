@@ -1,0 +1,89 @@
+how to solve this error "fatal: Authentication failed for 'https://github.com/Keshari07/26-November-PNQ.git/'
+root@Keshri:/home/Matata/26-November-2024/26-November-PNQ#" on git using Linux with example ?
+ChatGPT said:
+ChatGPT
+The error fatal: Authentication failed indicates that Git was unable to authenticate with the remote repository. This can happen for various reasons, such as incorrect credentials or an outdated authentication method. Here's how to resolve it on Linux, with an example:
+
+Steps to Fix the Error
+1. Verify Your Credentials
+Make sure you have the correct username and password or personal access token (PAT) if the repository requires it.
+GitHub stopped supporting password authentication in August 2021. Use a PAT instead.
+2. Use a Personal Access Token (PAT)
+Generate a PAT from GitHub:
+Log in to your GitHub account.
+Go to Settings > Developer Settings > Personal Access Tokens > Tokens (classic).
+Click Generate new token (classic).
+Select the appropriate scopes (e.g., repo for full access to private/public repositories).
+Copy the generated token.
+3. Update the Repository URL
+Replace the username and password in the repository URL with your PAT.
+
+bash
+Copy code
+git remote set-url origin https://<your-username>:<your-token>@github.com/Keshari07/26-November-PNQ.git
+Example:
+
+bash
+Copy code
+git remote set-url origin https://johnDoe:ghp_ABC1234XYZ5678@github.com/Keshari07/26-November-PNQ.git
+4. Store Credentials Using Credential Manager
+Use Git's credential helper to store your credentials securely.
+
+bash
+Copy code
+git config --global credential.helper store
+Run a command like git pull, enter your username and PAT when prompted, and Git will store them for future use.
+
+5. Verify Authentication
+Test the connection by running:
+
+bash
+Copy code
+git pull
+Example
+Check Current Remote URL:
+
+bash
+Copy code
+git remote -v
+Update URL with PAT: Replace the old URL with the new one containing your PAT:
+
+bash
+Copy code
+git remote set-url origin https://<your-username>:<your-token>@github.com/Keshari07/26-November-PNQ.git
+Store the Credentials:
+
+bash
+Copy code
+git config --global credential.helper store
+Test the Connection:
+
+bash
+Copy code
+git pull
+Troubleshooting
+SSH Key Authentication: If you prefer SSH over HTTPS, configure your SSH keys:
+
+Generate an SSH key:
+bash
+Copy code
+ssh-keygen -t ed25519 -C "your-email@example.com"
+Add the key to your GitHub account under Settings > SSH and GPG keys.
+Update the remote URL to use SSH:
+bash
+Copy code
+git remote set-url origin git@github.com:Keshari07/26-November-PNQ.git
+Test with:
+bash
+Copy code
+git pull
+Check Network Issues: Ensure there are no proxy or firewall restrictions blocking GitHub.
+
+Let me know if you need more help!
+
+
+
+
+
+
+
